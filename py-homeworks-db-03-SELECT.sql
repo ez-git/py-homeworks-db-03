@@ -8,9 +8,13 @@ WHERE
 SELECT
        name,
        duration
-FROM tracks
-order by duration DESC
-LIMIT 1;
+FROM
+     tracks
+WHERE
+       duration = (SELECT
+                          MAX(duration)
+                   FROM
+                         tracks);
 
 SELECT
        name
@@ -23,3 +27,16 @@ SELECT
 FROM collections
 WHERE
       release_year BETWEEN DATE('2018-01-01') AND DATE('2020-01-01');
+
+SELECT
+       name
+FROM artists
+WHERE
+      name NOT LIKE '% %';
+
+SELECT
+       name
+FROM tracks
+WHERE
+      LOWER(name) LIKE '%my%';
+
